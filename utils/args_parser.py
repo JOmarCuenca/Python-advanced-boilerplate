@@ -8,11 +8,13 @@ LOG_LEVELS = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 class Args:
     verbose: bool
     log_level: str
+    log_file_extension: str
 
     def __str__(self) -> str:
         return str({
             "verbose": self.verbose,
             "log_level": self.log_level,
+            "log_file_extension": self.log_file_extension,
         })
 
     def parseArgs():
@@ -38,6 +40,11 @@ class Args:
                             help="Set log level to debug, info, warning, error, critical",
                             choices=LOG_LEVELS, type=str.upper,
                             metavar="LOG_LEVEL")
+        parser.add_argument("--log_file_extension", dest="log_file_extension", default="run",
+                            help="Set log file extension path",
+                            type=str,
+                            required=True,
+                            metavar="LOG_FILE_EXTENSION_PATH")
 
         args = parser.parse_args()
 

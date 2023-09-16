@@ -1,0 +1,2 @@
+class AlreadyInitException(Exception):
+    pass

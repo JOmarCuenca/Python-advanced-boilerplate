@@ -1,9 +1,10 @@
 from datetime import datetime
+from os import mkdir
+from os.path import exists
 
 from loguru import logger
 
-from os import mkdir
-from os.path import exists
+from errors.already_init import AlreadyInitException
 
 __init = False
 
@@ -20,11 +21,12 @@ LOG_FORMAT = " | ".join([
 ])
 
 
-def init_log_record(log_level: str, verbose=False):
+@logger.catch()
+def init_log_record(log_level: str, log_file_extension: str, verbose=False, **kwargs):
     global __init
     verbose = verbose or __GLOBAL_VERBOSE
     date = datetime.now().strftime("%Y-%m-%d")
-    LOG_FILE_PATH = f"{__LOG_FILES_PATH}/{date}_run.log"
+    LOG_FILE_PATH = f"{__LOG_FILES_PATH}/{date}_{log_file_extension}.log"
     dir_created, file_created = not exists(
         __LOG_FILES_PATH), not exists(LOG_FILE_PATH)
     if not __init:
@@ -48,3 +50,7 @@ def init_log_record(log_level: str, verbose=False):
                 f"Log file created -> {LOG_FILE_PATH}")
 
         logger.debug(f"Log level set to {log_level}")
+
+        __init = True
+    else:
+        raise AlreadyInitException("Logger already initialized")
