@@ -1,11 +1,21 @@
-from utils import getLogger, Args
+from utils import Args
+from utils.log_manager import init_log_record
+
+from loguru import logger
 from dotenv import load_dotenv, dotenv_values
 
-args = Args.parseArgs()
+@logger.catch(reraise=True)
+def __init_logger_args() -> dict:
+    args = Args.parseArgs()
 
-logger = getLogger(**args.__dict__)
+    init_log_record(**args.__dict__)
 
-logger.info(f"Args: {args}")
+    logger.debug(f"Args: {args}")
+
+    return args
+
+
+args = __init_logger_args()
 
 """
 I recommend the rest of the code is placed below this comment
@@ -14,20 +24,18 @@ so that proper init file for logs and args is in place.
 Including other imports
 """
 
-load_dotenv()
+@logger.catch(reraise=True)
+def __load_env_values() -> dict:
+    load_dotenv()
 
-config = dotenv_values(".env")
+    config = dotenv_values(".env")
 
-logger.info(f"Config: {config}")
+    logger.info("Dot env values loaded")
 
-logger.info(config["val"])
+    logger.debug(f"Config: {config}")
 
-try:
-    logger.debug("Debug")
-    logger.info("Info")
-    logger.warning("Warning")
-    logger.error("Error")
-    logger.critical("Critical")
-    raise Exception("Exception")
-except Exception as e:
-    logger.exception(e)
+    return config
+
+__load_env_values()
+
+
