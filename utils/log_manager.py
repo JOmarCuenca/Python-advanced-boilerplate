@@ -18,12 +18,12 @@ LOG_FORMAT = " | ".join([
 ])
 
 
-def getLogger(debug=False):
-    debug = debug or __GLOBAL_VERBOSE
+def getLogger(log_level : str, verbose=False):
+    verbose = verbose or __GLOBAL_VERBOSE
     global __instance
     created = False
     if not __instance:
-        if not (debug or __GLOBAL_VERBOSE):
+        if not (verbose or __GLOBAL_VERBOSE):
             logger.remove()
 
         if not verify_dir(__LOG_FILES_PATH):
@@ -32,7 +32,10 @@ def getLogger(debug=False):
         
         date = datetime.now().strftime("%Y-%m-%d")
         # Center each log formatted string to center each section in the output file
-        logger.add(f"{__LOG_FILES_PATH}/{date}_run.log", level="DEBUG", format=LOG_FORMAT)
+        logger.add(f"{__LOG_FILES_PATH}/{date}_run.log", level=log_level, format=LOG_FORMAT)
+
+        logger.debug(f"Log level set to {log_level}")
+
         if created:
             logger.error(f"{__LOG_FILES_PATH} directory created")
             

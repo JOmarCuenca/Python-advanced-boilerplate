@@ -1,13 +1,18 @@
 import argparse
+from dataclasses import dataclass
 
+LOG_LEVELS = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+
+
+@dataclass(frozen=True, repr=True, eq=True)
 class Args:
-    def __init__(self,
-                 verbose: bool) -> None:
-        self.verbose = verbose
+    verbose: bool
+    log_level: str
 
     def __str__(self) -> str:
         return str({
             "verbose": self.verbose,
+            "log_level": self.log_level,
         })
 
     def parseArgs():
@@ -29,9 +34,13 @@ class Args:
         #                     nargs='?', help="Date string of the dates to download")
         parser.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                             help="Increase output verbosity")
+        parser.add_argument("--log_level", dest="log_level", default="info",
+                            help="Set log level to debug, info, warning, error, critical",
+                            choices=LOG_LEVELS, type=str.upper,
+                            metavar="LOG_LEVEL")
 
         args = parser.parse_args()
 
         return Args(
-            args.verbose,
+            **args.__dict__
         )

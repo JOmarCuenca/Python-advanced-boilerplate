@@ -3,7 +3,7 @@ from dotenv import load_dotenv, dotenv_values
 
 args = Args.parseArgs()
 
-logger = getLogger(debug=args.verbose)
+logger = getLogger(**args.__dict__)
 
 logger.info(f"Args: {args}")
 
@@ -21,3 +21,13 @@ config = dotenv_values(".env")
 logger.info(f"Config: {config}")
 
 logger.info(config["val"])
+
+try:
+    logger.debug("Debug")
+    logger.info("Info")
+    logger.warning("Warning")
+    logger.error("Error")
+    logger.critical("Critical")
+    raise Exception("Exception")
+except Exception as e:
+    logger.exception(e)
