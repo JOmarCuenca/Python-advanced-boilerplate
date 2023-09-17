@@ -46,9 +46,7 @@ __load_env_values()
 def main():
     logger.info("Main function called")
 
-    for i in range(1, 11):
-        logger.debug(f"Attempt #{i}")
-        init_log_record(**args.__dict__)
+    pass
 
 
 main()
