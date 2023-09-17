@@ -21,7 +21,7 @@ LOG_FORMAT = " | ".join([
 ])
 
 
-@logger.catch()
+@logger.catch
 def init_log_record(log_level: str, log_file_extension: str, verbose: bool, **kwargs):
     global __init
     verbose = verbose or __GLOBAL_VERBOSE
