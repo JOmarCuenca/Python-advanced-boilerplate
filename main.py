@@ -4,6 +4,9 @@ from loguru import logger
 from utils import Args
 from utils.log_manager import init_log_record
 
+from tqdm import tqdm
+from time import sleep
+
 
 @logger.catch(reraise=True)
 def __init_logger_args() -> dict:
@@ -46,7 +49,8 @@ __load_env_values()
 def main():
     logger.info("Main function called")
 
-    pass
+    for i in tqdm(range(100), unit="oper"):
+        sleep(0.1)
 
 
 main()
