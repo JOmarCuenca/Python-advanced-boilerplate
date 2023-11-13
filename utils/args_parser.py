@@ -43,7 +43,6 @@ class Args:
         parser.add_argument("--log_file_extension", dest="log_file_extension", default="run",
                             help="Set log file extension path",
                             type=str,
-                            required=True,
                             metavar="LOG_FILE_EXTENSION_PATH")
 
         args = parser.parse_args()
