@@ -6,26 +6,26 @@
   "configurations": [
     {
       "name": "Python: Current File",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
       "justMyCode": true
     },
     {
-      "name": "Run main",
-      "type": "python",
+      "name": "Debug Main",
+      "type": "debugpy",
       "request": "launch",
       "program": "main.py",
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "-v",
-        "--log_level",
-        "DEBUG",
-        "--log_file_extension",
-        "debug"
+          "-v",
+          "--log-level",
+          "DEBUG",
+          "--log-file-extension",
+          "debug",
       ]
-    }
+  }
   ]
 }

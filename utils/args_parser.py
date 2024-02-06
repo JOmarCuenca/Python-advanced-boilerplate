@@ -1,7 +1,6 @@
 import argparse
+from constants.log_level import LogLevel
 from dataclasses import dataclass
-
-LOG_LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
 
 
 @dataclass(frozen=True, repr=True, eq=True)
@@ -45,16 +44,16 @@ class Args:
             help='Increase output verbosity',
         )
         parser.add_argument(
-            '--log_level',
+            '--log-level',
             dest='log_level',
-            default='info',
+            default=LogLevel.INFO.value,
             help='Set log level to debug, info, warning, error, critical',
-            choices=LOG_LEVELS,
+            choices=[log_level.value for log_level in LogLevel],
             type=str.upper,
             metavar='LOG_LEVEL',
         )
         parser.add_argument(
-            '--log_file_extension',
+            '--log-file-extension',
             dest='log_file_extension',
             default='run',
             help='Set log file extension path',
