@@ -1,8 +1,8 @@
 from dotenv import dotenv_values, load_dotenv
 from loguru import logger
 
-from utils import Args
-from utils.log_manager import init_log_record
+from utils import init_log_record
+from utils.args_parser import Args
 
 from tqdm import tqdm
 from time import sleep
@@ -45,10 +45,14 @@ __load_env_values()
 
 @logger.catch()
 def main():
+    args = Args.parseArgs()
+    init_log_record(args.log_level, args.log_file_extension, args.verbose)
+
     logger.info('Main function called')
 
     for i in tqdm(range(100), unit='oper'):
         sleep(0.1)
 
 
-main()
+if __name__ == '__main__':
+    main()
