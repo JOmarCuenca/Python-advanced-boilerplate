@@ -1,14 +1,14 @@
-from unittest import TestCase
-from parameterized import parameterized
+import pytest
 
 
-class TestParameterized(TestCase):
-    @parameterized.expand(
-        [
-            ('01', 1, 2, 3),
-            ('02', 2, 3, 5),
-            ('03', 3, 5, 8),
-        ],
-    )
-    def test_add(self, name, a, b, expected):
-        self.assertEqual(a + b, expected)
+
+@pytest.mark.parametrize(
+    'a, b, expected',
+    [
+        (1, 2, 3),
+        (2, 3, 5),
+        (3, 5, 8),
+    ],
+)
+def test_add(a, b, expected):
+    assert a + b == expected

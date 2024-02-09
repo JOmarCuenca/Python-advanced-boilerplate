@@ -1,8 +1,10 @@
 cfgv==3.4.0
 click==8.1.7
 distlib==0.3.7
+exceptiongroup==1.2.0
 filelock==3.13.1
 identify==2.5.31
+iniconfig==2.0.0
 loguru==0.7.0
 mypy-extensions==1.0.0
 nodeenv==1.8.0
@@ -10,7 +12,9 @@ packaging==23.2
 parameterized==0.9.0
 pathspec==0.11.2
 platformdirs==3.11.0
+pluggy==1.4.0
 pre-commit==3.5.0
+pytest==8.0.0
 python-dotenv==1.0.0
 PyYAML==6.0.1
 tomli==2.0.1
