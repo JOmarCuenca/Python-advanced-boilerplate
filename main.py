@@ -50,7 +50,7 @@ def main():
 
     logger.info('Main function called')
 
-    for i in tqdm(range(100), unit='oper'):
+    for i in tqdm(range(100), unit=' oper'):
         sleep(0.1)
 
 
