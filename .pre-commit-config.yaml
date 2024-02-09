@@ -22,6 +22,7 @@ repos:
     rev: v1.5.2
     hooks:
     -   id: dead
+        args: [ --exclude , constants/* ]
 # -   repo: https://github.com/psf/black
 #     hooks:
 #     -   id: black
