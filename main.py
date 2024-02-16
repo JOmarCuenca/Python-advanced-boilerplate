@@ -10,7 +10,7 @@ from time import sleep
 
 @logger.catch(reraise=True)
 def __init_logger_args() -> dict:
-    args = Args.parseArgs()
+    args = Args.parse_args()
 
     init_log_record(**args.__dict__)
 
@@ -45,7 +45,7 @@ __load_env_values()
 
 @logger.catch()
 def main():
-    args = Args.parseArgs()
+    args = Args.parse_args()
     init_log_record(args.log_level, args.log_file_extension, args.verbose)
 
     logger.info('Main function called')

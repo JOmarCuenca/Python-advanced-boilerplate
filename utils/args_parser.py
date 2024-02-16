@@ -19,7 +19,7 @@ class Args:
         )
 
     @staticmethod
-    def parseArgs():
+    def parse_args():
         parser = argparse.ArgumentParser(
             prog='Python advanced template',
             description='Remember to change this description to something useful for your project',
